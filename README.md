@@ -1,1 +1,1 @@
-# CLI_Chess
+# CLI_TicTacToe
