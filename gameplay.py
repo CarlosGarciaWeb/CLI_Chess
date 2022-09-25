@@ -1,0 +1,99 @@
+from curses.ascii import isdigit
+import pandas as pd
+
+class GamePlay():
+
+    def __init__(self, player_name, other_name):
+        self.player_1 = player_name
+        self.player_2 = other_name
+        self.moves = {
+            self.player_1: [],
+            self.player_2: []
+            }
+        self.game_instructions = """
+        INSTRUCTIONS:
+
+        The board looks like this 
+        
+         1 2 3
+
+      1  _|_|_
+      2  _|_|_
+      3   | | 
+        
+        To make a move you must choose column and row, choosing (1,1) for example would put a move as shown below:
+
+         1 2 3
+
+      1  X|_|_
+      2  _|_|_
+      3   | | 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+        """
+    def ask_move(self, user_player):
+        move_output_col = input("Please provide a Column: ")
+        move_output_row = input("Please provide a Row: ")
+
+        if move_output_col.isdigit() and move_output_row.isdigit():
+            if 1 <= int(move_output_col) <= 3 and 1 <= int(move_output_row) <= 3:
+                self.play_move(user_player=user_player, move_col=int(move_output_col), move_row=int(move_output_row))
+            else:
+                if not 1 <= int(move_output_col) <= 3:
+                    print("""
+                
+                INVALID COLUMN MOVE
+                
+                """)
+                elif not 1 <= int(move_output_row) <= 3:
+                    print("""
+                
+                INVALID ROW MOVE
+                
+                """)
+                else:
+                    print("""
+                
+                INVALID MOVES IN COLUMN AND ROW
+                
+                """)    
+                self.ask_move(user_player)
+        else:
+            if move_output_col.isdigit():
+                print("""
+                
+                INVALID COLUMN MOVE
+                
+                """)
+            elif move_output_row.isdigit():
+                print("""
+                
+                INVALID ROW MOVE
+                
+                """)
+            else:
+                print("""
+                
+                INVALID MOVES IN COLUMN AND ROW
+                
+                """)
+            self.ask_move(user_player)
+
+
+    def play_move(self, user_player, move_col, move_row):
+
+        player = user_player
+        player_move = []
+        player_move.append((move_col, move_row))
+        self.moves[player] = player_move
+
+
+    def record_moves(self):
+        df = pd.DataFrame(self.moves)
+        df.to_csv('game_history.csv')
+
+    def check_game(self, check):
+        if check:
+            self.record_moves()
+
+
