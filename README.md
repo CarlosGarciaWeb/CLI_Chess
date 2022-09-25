@@ -1,1 +1,1 @@
-# CLI_Ches
+# CLI_Chess
