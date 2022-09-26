@@ -1,4 +1,3 @@
-
 class Board():
 
     def __init__(self):
@@ -20,20 +19,6 @@ class Board():
 
         return self.board
 
-    def place_chip(self, position, player):
-        if position == "r1_1" and player == 1:
-            self.board = """
-                1 2 3
-
-            1  X|_|_
-            2  _|_|_
-            3   | |
-
-                
-                """
-        elif position == "r1_1" and player == 2:
-            self.board
-
     def create_positions(self):
         position = 0
         positions_list = []
@@ -44,5 +29,13 @@ class Board():
                     positions_list.append(position)
                 count += 1
             position += 1
-        return positions_list
+        self.positions = positions_list
+        return self.positions
+
+    def board_engine(self):
+        pass
+
+
+    def update_board(self, move_col, move_row):
+        pass
 

@@ -1,4 +1,3 @@
-from curses.ascii import isdigit
 import pandas as pd
 
 class GamePlay():
@@ -32,8 +31,8 @@ class GamePlay():
 ----------------------------------------------------------------------------------------------------------------------------------------
         """
     def ask_move(self, user_player):
-        move_output_col = input("Please provide a Column: ")
-        move_output_row = input("Please provide a Row: ")
+        move_output_col = input(f"[{user_player}] Please provide a Column: ")
+        move_output_row = input(f"[{user_player}] Please provide a Row: ")
 
         if move_output_col.isdigit() and move_output_row.isdigit():
             if 1 <= int(move_output_col) <= 3 and 1 <= int(move_output_row) <= 3:
@@ -83,9 +82,7 @@ class GamePlay():
     def play_move(self, user_player, move_col, move_row):
 
         player = user_player
-        player_move = []
-        player_move.append((move_col, move_row))
-        self.moves[player] = player_move
+        self.moves[player].append((move_col, move_row))
 
 
     def record_moves(self):
