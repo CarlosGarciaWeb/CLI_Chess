@@ -2,7 +2,7 @@ from time import gmtime
 from board import Board
 from gameplay import GamePlay
 game_board = Board()
-
+print("Hello!")
 
 if __name__ == "__main__":
     # Create the board object
