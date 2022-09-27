@@ -23,11 +23,12 @@ if __name__ == "__main__":
     turn_p2 = 1
     for _ in range(9):
         if check:
-            print(turn_p1)      
+                  
             play_game.ask_move(player_1)
             piece = 'X'
             check = False
-            played_move = play_game.moves[player_1][turn_p1-1]            
+            played_move = play_game.moves[player_1][turn_p1-1]
+            print(played_move)            
             game_board.update_board(move=played_move, piece=piece)
             play_game.check_game(player_1)
             if play_game.winner == player_1:
@@ -46,6 +47,7 @@ if __name__ == "__main__":
                 print(f'{player_2} wins!')
                 break
             turn_p2 += 1
+        print(play_game.moves)
     if play_game.winner == "":
         print("It's a draw!")
 

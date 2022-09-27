@@ -38,12 +38,9 @@ class GamePlay():
         move_output_col = input(f"[{user_player}] Please provide a Column: ")
         move_output_row = input(f"[{user_player}] Please provide a Row: ")
         if move_output_col.isdigit() and move_output_row.isdigit():
+            move = (int(move_output_col), int(move_output_row))
             if 1 <= int(move_output_col) <= 3 and 1 <= int(move_output_row) <= 3:
-                self.check_move(move=(int(move_output_col), int(move_output_row)), user_player=user_player)
-                check_valid = self.check_move((int(move_output_col), int(move_output_row)), user_player)
-                print(check_valid)
-                if check_valid:
-                    self.play_move(user_player=user_player, move_col=int(move_output_col), move_row=int(move_output_row))
+                self.check_move(move=move, user_player=user_player)
             else:
                 if not 1 <= int(move_output_col) <= 3:
                     print("""
@@ -86,10 +83,10 @@ class GamePlay():
             self.ask_move(user_player)
 
 
-    def play_move(self, user_player, move_col, move_row):
+    def play_move(self, user_player, move):
 
         player = user_player
-        self.moves[player].append((move_col, move_row))
+        self.moves[player].append((move))
 
 
     def record_moves(self):
@@ -98,8 +95,7 @@ class GamePlay():
 
 
     def check_move(self, move, user_player):
-        check_result = True
-        print(move, self.moves[self.player_1], self.moves[self.player_2])
+        print(move)
         if move in self.moves[self.player_1] or move in self.moves[self.player_2]:
             print('''
             
@@ -109,11 +105,9 @@ class GamePlay():
 
             
             ''')
-            check_result = False
             self.ask_move(user_player)
-            return check_result
         else:
-            return check_result
+            self.play_move(user_player=user_player, move=move)
 
 
 
