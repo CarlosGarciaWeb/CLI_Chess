@@ -52,6 +52,6 @@ if __name__ == "__main__":
         print("It's a draw!")
 
 
-        
-    print(play_game.moves)  
+    #TODO create a game history that shows players amounts of wins. game id, player id who won and player id who lost. moves to win etc.
+    # print(play_game.moves)  
 
