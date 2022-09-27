@@ -30,6 +30,10 @@ class GamePlay():
 
 ----------------------------------------------------------------------------------------------------------------------------------------
         """
+        self.winner = ""
+
+
+
     def ask_move(self, user_player):
         move_output_col = input(f"[{user_player}] Please provide a Column: ")
         move_output_row = input(f"[{user_player}] Please provide a Row: ")
@@ -89,8 +93,35 @@ class GamePlay():
         df = pd.DataFrame(self.moves)
         df.to_csv('game_history.csv')
 
-    def check_game(self, check):
-        if check:
-            self.record_moves()
 
+
+
+
+    def check_game(self, user_player):
+        if (1,1) in self.moves[user_player] and (2,1) in self.moves[user_player] and (3,1) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (1,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (3,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (1,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (1,2) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,2) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (1,3) in self.moves[user_player] and (2,3) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (1,1) in self.moves[user_player] and (1,2) in self.moves[user_player] and (1,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (2,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (2,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        elif (3,1) in self.moves[user_player] and (3,2) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            self.winner = user_player
+            return f'winner is {user_player}'
+        else:
+            return 'no winner yet'
 
