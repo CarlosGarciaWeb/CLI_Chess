@@ -37,10 +37,13 @@ class GamePlay():
     def ask_move(self, user_player):
         move_output_col = input(f"[{user_player}] Please provide a Column: ")
         move_output_row = input(f"[{user_player}] Please provide a Row: ")
-
         if move_output_col.isdigit() and move_output_row.isdigit():
             if 1 <= int(move_output_col) <= 3 and 1 <= int(move_output_row) <= 3:
-                self.play_move(user_player=user_player, move_col=int(move_output_col), move_row=int(move_output_row))
+                self.check_move(move=(int(move_output_col), int(move_output_row)), user_player=user_player)
+                check_valid = self.check_move((int(move_output_col), int(move_output_row)), user_player)
+                print(check_valid)
+                if check_valid:
+                    self.play_move(user_player=user_player, move_col=int(move_output_col), move_row=int(move_output_row))
             else:
                 if not 1 <= int(move_output_col) <= 3:
                     print("""
@@ -94,34 +97,52 @@ class GamePlay():
         df.to_csv('game_history.csv')
 
 
+    def check_move(self, move, user_player):
+        check_result = True
+        print(move, self.moves[self.player_1], self.moves[self.player_2])
+        if move in self.moves[self.player_1] or move in self.moves[self.player_2]:
+            print('''
+            
+            INVALID MOVE. 
+            
+            Try again.
+
+            
+            ''')
+            check_result = False
+            self.ask_move(user_player)
+            return check_result
+        else:
+            return check_result
+
 
 
 
     def check_game(self, user_player):
-        if (1,1) in self.moves[user_player] and (2,1) in self.moves[user_player] and (3,1) in self.move[user_player]:
+        if (1,1) in self.moves[user_player] and (2,1) in self.moves[user_player] and (3,1) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (1,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            return user_player
+        elif (1,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (3,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (1,3) in self.move[user_player]:
+            return user_player
+        elif (3,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (1,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (1,2) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,2) in self.move[user_player]:
+            return user_player
+        elif (1,2) in self.moves[user_player] and (2,2) in self.moves[user_player] and (3,2) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (1,3) in self.moves[user_player] and (2,3) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            return user_player
+        elif (1,3) in self.moves[user_player] and (2,3) in self.moves[user_player] and (3,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (1,1) in self.moves[user_player] and (1,2) in self.moves[user_player] and (1,3) in self.move[user_player]:
+            return user_player
+        elif (1,1) in self.moves[user_player] and (1,2) in self.moves[user_player] and (1,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (2,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (2,3) in self.move[user_player]:
+            return user_player
+        elif (2,1) in self.moves[user_player] and (2,2) in self.moves[user_player] and (2,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
-        elif (3,1) in self.moves[user_player] and (3,2) in self.moves[user_player] and (3,3) in self.move[user_player]:
+            return user_player
+        elif (3,1) in self.moves[user_player] and (3,2) in self.moves[user_player] and (3,3) in self.moves[user_player]:
             self.winner = user_player
-            return f'winner is {user_player}'
+            return user_player
         else:
-            return 'no winner yet'
+            return ''
 
